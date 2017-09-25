@@ -17,11 +17,27 @@ public class Smc
     Hashtable<Object, Object> M;
     Stack C;
     
-    public void Exp (Exp e){
+    
+    
+    public void EvalExp (Exp e)
+    {
+        switch(e.getTipo())
+        {
+            case ATRIBUICAO:
+                EvalExp(e.getFilho_dir());
+                M.put(e.getFilho_esq().getValue(), S.pop());
+                break;
+                
+            case VAR:
+                S.push(M.get(e.getValue()));
+        }
+    }
+    
+    public void EvalCmd (Cmd c){
         
     }
     
-    public void Cmd (Cmd c){
+    public void Smc(Stack S, Hashtable<Object,Object> M, Stack C){
         
     }
 }
